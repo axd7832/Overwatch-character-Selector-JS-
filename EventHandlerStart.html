@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Events</title>
+	<script type="text/javascript">
+
+	
+	//For Image 2 --------------------------------------------------------------------
+	//assign an event to Image 2
+	function init(){
+	//no parameters on the mouseHandler
+	//parenthesis cause method to be run at page load 
+		document.images[1].onmouseover = mouseHandler;
+	//with parameters on a function, we need to wrap the function call
+	//without wrapper function, clickHandler is called on load
+		document.images[1].onclick=function(){
+			clickHandler('From a JS Click Event', this);
+			
+		}
+	}
+	function mouseHandler(){
+		alert('mouseHandler mouseover event');
+	}
+	
+	  
+	  
+    //For Image 3 --------------------------------------------------------------------
+	//attach an event to Image 3
+	function init2(){
+		var dom = document.getElementById('pic3');
+		// for IE
+		if(document.attachEvent){
+			dom.attachEvent('onmouseover',function(){
+				doIt('in IE attach Event');
+			});
+		}
+		else{
+			dom.addEventListener('click', function(){
+			doIt("GECKO");
+			dom.addEventListener('click',doThat);
+			});
+		}
+	}
+		function doThat(){
+			alert("Which showed first?");
+			document.getElementById('pic3').removeElementListener('click',doThat);
+		}
+		function doIt(msg){
+		alert(msg);
+	}
+
+	</script>
+</head>
+<body onload="init();init2();">
+
+  <h1>Image 1:</h1><img src="js.png" onclick= "alert('Hi from HTML Attribute')";/>
+  
+  <h1>Image 2:</h1><img src="js.png"/>
+  
+  <h1>Image 3:</h1><img id='pic3' src="js.png"/>
+
+</body>
+</html>
