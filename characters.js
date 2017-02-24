@@ -106,7 +106,7 @@ var idCount = 1;
 				//Create a new form
 				var newForm = document.createElement('form');
 				newForm.setAttribute('id','newForm'+ idCount);
-				document.getElementById('newDiv' + idCount).appendChild(newForm);
+				document.getElementById('newDiv' + idCount).appendChild(newForm);``
 
 				//new Select Statement
 				var newSelect = document.createElement('select');
@@ -183,3 +183,23 @@ var idCount = 1;
 
 		}
 addOptions("empty");
+
+//cookie
+		//if a cookie doesnt exist, the user hasnt been here before
+		if( GetCookie('user_id') == null){//no cookies
+		//get the users nickname
+		var getName = prompt('Hello user! What is your name?');
+		document.write('<h2>Welcome, '+getName+ '! This is your first time here. </h2>');
+		SetCookie('user_id',getName);
+		SetCookie('hit_count','1');
+		console.log(GetCookie('user_id'));
+		}
+		//set the cookies
+	//else we have a return visitor
+		else{
+			var getName = GetCookie('user_id');
+			var getHits = GetCookie('hit_count');
+			getHits = parseInt(getHits)+1;
+			document.write('<h2>Welcome back, '+getName+ '! You have visited: '+getHits+'. </h2>');
+			SetCookie('hit_count',getHits); //update hit count
+		}
